@@ -48,12 +48,10 @@ pnpm add recursive-directory
 - TypeScript
 
 ```ts
-import recursiveDirectory, { RecursiveDirectory } from 'recursive-directory';
+import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
 
 (async () => {
-  const files: RecursiveDirectory = await recursiveDirectory(
-    './devicon/icons/',
-  );
+  const files: RecursiveDirectory = await recursiveDirectory('./dir');
 
   console.log(files);
 })();
@@ -65,7 +63,7 @@ import recursiveDirectory, { RecursiveDirectory } from 'recursive-directory';
 import recursiveDirectory from 'recursive-directory';
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/');
+  const files = await recursiveDirectory('./dir');
 
   console.log(files);
 })();
@@ -77,24 +75,41 @@ import recursiveDirectory from 'recursive-directory';
 const recursiveDirectory = require('recursive-directory');
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/');
+  const files = await recursiveDirectory.recursiveDirectory('./dir');
 
   console.log(files);
 })();
 ```
+
+- Expected result
+
+<details>
+
+```json
+[
+  "/home/mkabumttar/work/recursive-directory/dir/assets/css/normalize.css",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/css/style.css",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/icons/favicon.ico",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/icons/icon.svg",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.png",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.svg",
+  "/home/mkabumttar/work/recursive-directory/dir/assets/js/main.js",
+  "/home/mkabumttar/work/recursive-directory/dir/index.html",
+  "/home/mkabumttar/work/recursive-directory/dir/manifest.webmanifest"
+]
+```
+
+</details>
 
 ### List of files as object
 
 - TypeScript
 
 ```ts
-import recursiveDirectory, { RecursiveDirectory } from 'recursive-directory';
+import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
 
 (async () => {
-  const files: RecursiveDirectory = await recursiveDirectory(
-    './devicon/icons/',
-    true,
-  );
+  const files: RecursiveDirectory = await recursiveDirectory('./dir', true);
 
   console.log(files);
 })();
@@ -106,7 +121,7 @@ import recursiveDirectory, { RecursiveDirectory } from 'recursive-directory';
 import recursiveDirectory from 'recursive-directory';
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/', true);
+  const files = await recursiveDirectory('./dir', true);
 
   console.log(files);
 })();
@@ -118,34 +133,215 @@ import recursiveDirectory from 'recursive-directory';
 const recursiveDirectory = require('recursive-directory');
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/', true);
+  const files = await recursiveDirectory.recursiveDirectory('./dir', true);
 
   console.log(files);
 })();
 ```
 
-### List of files as object exported as `json` file
+- Expected result
+
+<details>
+
+```json
+[
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/css/normalize.css",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/css/",
+    "filename": "normalize.css",
+    "dirname": "css"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/css/style.css",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/css/",
+    "filename": "style.css",
+    "dirname": "css"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/icons/favicon.ico",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/icons/",
+    "filename": "favicon.ico",
+    "dirname": "icons"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/icons/icon.svg",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/icons/",
+    "filename": "icon.svg",
+    "dirname": "icons"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.png",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/images/",
+    "filename": "logo.png",
+    "dirname": "images"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.svg",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/images/",
+    "filename": "logo.svg",
+    "dirname": "images"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/assets/js/main.js",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/assets/js/",
+    "filename": "main.js",
+    "dirname": "js"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/index.html",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/",
+    "filename": "index.html",
+    "dirname": "dir"
+  },
+  {
+    "fullpath": "/home/mkabumttar/work/recursive-directory/dir/manifest.webmanifest",
+    "filepath": "/home/mkabumttar/work/recursive-directory/dir/",
+    "filename": "manifest.webmanifest",
+    "dirname": "dir"
+  }
+]
+```
+
+</details>
+
+### List of files as tree
 
 - TypeScript
 
 ```ts
-import recursiveDirectory, { RecursiveDirectory } from 'recursive-directory';
+import {
+  recursiveDirectory,
+  RecursiveDirectory,
+  directoryTree,
+} from 'recursive-directory';
+
+(async () => {
+  const files: RecursiveDirectory = (await recursiveDirectory(
+    './dir',
+  )) as string[];
+
+  const fileTree = directoryTree(files);
+
+  console.log(fileTree);
+})();
+```
+
+- ECMAScript modules
+
+```js
+import recursiveDirectory, { directoryTree } from 'recursive-directory';
+
+(async () => {
+  const files = await recursiveDirectory('./dir');
+
+  const fileTree = directoryTree(files);
+
+  console.log(fileTree);
+})();
+```
+
+- CommonJS
+
+```js
+const recursiveDirectory = require('recursive-directory');
+
+(async () => {
+  const files = await recursiveDirectory.recursiveDirectory('./dir');
+
+  const fileTree = recursiveDirectory.directoryTree(files);
+
+  console.log(fileTree);
+})();
+```
+
+- Expected result
+
+<details>
+
+```txt
+/home/mkabumttar/work/recursive-directory/dir
+├── assets
+|  ├── css
+|  |  ├── normalize.css
+|  |  └── style.css
+|  ├── icons
+|  |  ├── favicon.ico
+|  |  └── icon.svg
+|  ├── images
+|  |  ├── logo.png
+|  |  └── logo.svg
+|  └── js/main.js
+├── index.html
+└── manifest.webmanifest
+```
+
+</details>
+
+### Example
+
+<details>
+
+- TypeScript
+
+```ts
+import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
 import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 (async () => {
-  const files: RecursiveDirectory = await recursiveDirectory(
-    './devicon/icons/',
-    true,
-  );
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
+
+  const files: RecursiveDirectory = await recursiveDirectory('./dir');
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
     JSON.stringify(files),
   );
+})();
+```
+
+```ts
+import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
+import path, { dirname } from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+(async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  const files: RecursiveDirectory = await recursiveDirectory('./dir', true);
+
+  fs.writeFileSync(
+    path.resolve(__dirname, 'build.config.json'),
+    JSON.stringify(files),
+  );
+})();
+```
+
+```ts
+import {
+  recursiveDirectory,
+  RecursiveDirectory,
+  directoryTree,
+} from 'recursive-directory';
+import path, { dirname } from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+(async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  const files: RecursiveDirectory = (await recursiveDirectory(
+    './dir',
+  )) as string[];
+
+  const fileTree = directoryTree(files);
+
+  fs.writeFileSync(path.resolve(__dirname, 'build.config.txt'), fileTree);
 })();
 ```
 
@@ -158,14 +354,52 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/', true);
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
+
+  const files = await recursiveDirectory('./dir');
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
     JSON.stringify(files),
   );
+})();
+```
+
+```js
+import recursiveDirectory from 'recursive-directory';
+import path, { dirname } from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+(async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  const files = await recursiveDirectory('./dir', true);
+
+  fs.writeFileSync(
+    path.resolve(__dirname, 'build.config.json'),
+    JSON.stringify(files),
+  );
+})();
+```
+
+```js
+import recursiveDirectory, { directoryTree } from 'recursive-directory';
+import path, { dirname } from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+
+(async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  const files = await recursiveDirectory('./dir');
+
+  const fileTree = directoryTree(files);
+
+  fs.writeFileSync(path.resolve(__dirname, 'build.config.txt'), fileTree);
 })();
 ```
 
@@ -177,7 +411,7 @@ const path = require('path');
 const fs = require('fs');
 
 (async () => {
-  const files = await recursiveDirectory('./devicon/icons/', true);
+  const files = await recursiveDirectory.recursiveDirectory('./dir');
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
@@ -186,19 +420,35 @@ const fs = require('fs');
 })();
 ```
 
-### You will get something like that
+```js
+const recursiveDirectory = require('recursive-directory');
+const path = require('path');
+const fs = require('fs');
 
-```json
-[
-  {
-    "fullpath": "/home/mkabumttar/work/recursive-directory-tmp/devicon/icons/aarch64/aarch64-original.svg",
-    "filepath": "/home/mkabumttar/work/recursive-directory-tmp/devicon/icons/aarch64/",
-    "filename": "aarch64-original.svg",
-    "dirname": "aarch64"
-  },
-  ...
-]
+(async () => {
+  const files = await recursiveDirectory.recursiveDirectory('./dir', true);
+
+  fs.writeFileSync(
+    path.resolve(__dirname, 'build.config.json'),
+    JSON.stringify(files),
+  );
+})();
 ```
+
+```js
+const recursiveDirectory = require('recursive-directory');
+const path = require('path');
+const fs = require('fs');
+
+(async () => {
+  const files = await recursiveDirectory.recursiveDirectory('./dir');
+  const fileTree = recursiveDirectory.directoryTree(files);
+
+  fs.writeFileSync(path.resolve(__dirname, 'build.config.txt'), fileTree);
+})();
+```
+
+</details>
 
 ---
 
