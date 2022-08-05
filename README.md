@@ -60,7 +60,7 @@ import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
 - ECMAScript modules
 
 ```js
-import recursiveDirectory from 'recursive-directory';
+import { recursiveDirectory } from 'recursive-directory';
 
 (async () => {
   const files = await recursiveDirectory('./dir');
@@ -118,7 +118,7 @@ import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
 - ECMAScript modules
 
 ```js
-import recursiveDirectory from 'recursive-directory';
+import { recursiveDirectory } from 'recursive-directory';
 
 (async () => {
   const files = await recursiveDirectory('./dir', true);
@@ -229,7 +229,7 @@ import {
 - ECMAScript modules
 
 ```js
-import recursiveDirectory, { directoryTree } from 'recursive-directory';
+import { recursiveDirectory, directoryTree } from 'recursive-directory';
 
 (async () => {
   const files = await recursiveDirectory('./dir');
@@ -348,7 +348,7 @@ import { fileURLToPath } from 'url';
 - ECMAScript modules
 
 ```js
-import recursiveDirectory from 'recursive-directory';
+import { recursiveDirectory } from 'recursive-directory';
 import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -367,7 +367,7 @@ import { fileURLToPath } from 'url';
 ```
 
 ```js
-import recursiveDirectory from 'recursive-directory';
+import { recursiveDirectory } from 'recursive-directory';
 import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -386,7 +386,7 @@ import { fileURLToPath } from 'url';
 ```
 
 ```js
-import recursiveDirectory, { directoryTree } from 'recursive-directory';
+import { recursiveDirectory, directoryTree } from 'recursive-directory';
 import path, { dirname } from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
