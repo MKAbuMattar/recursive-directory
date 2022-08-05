@@ -105,7 +105,7 @@ const SuccessResultAsObject: RecursiveDirectory = [
   },
 ];
 
-const SuccessResultAsTree: string = `/home/mkabumttar/work/recursive-directory/dir
+const SuccessResultAsTree = `/home/mkabumttar/work/recursive-directory/dir
 ├── assets
 |  ├── css
 |  |  ├── normalize.css

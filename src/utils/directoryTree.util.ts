@@ -63,24 +63,24 @@ const builderRenderTable = (
   roots: { values: () => any },
   pathSeparator: any,
 ) => {
-  let renderTable = [];
+  const renderTable = [];
   let toVisit = [...roots.values()];
 
-  let nodeDepths = new Map();
-  let lastNodes = new Set([toVisit[toVisit.length - 1]]);
+  const nodeDepths = new Map();
+  const lastNodes = new Set([toVisit[toVisit.length - 1]]);
 
   while (toVisit.length > 0) {
-    let currentNode = toVisit.shift();
+    const currentNode = toVisit.shift();
 
-    let nodeDepth = nodeDepths.get(currentNode) || 0;
+    const nodeDepth = nodeDepths.get(currentNode) || 0;
 
     while (currentNode.children.size === 1) {
-      let childNode = currentNode.children.values().next().value;
+      const childNode = currentNode.children.values().next().value;
       currentNode.value += `${pathSeparator}${childNode.value}`;
       currentNode.children = childNode.children;
     }
 
-    let children = [...currentNode.children.values()];
+    const children = [...currentNode.children.values()];
     if (children.length > 0) {
       for (const child of children) {
         nodeDepths.set(child, nodeDepth + 1);
@@ -102,7 +102,7 @@ const builderRenderTable = (
 
 const printTree = (renderTable: any, options: any) => {
   let outputString = '';
-  let activeColumns = [];
+  const activeColumns = [];
   for (const tableEntry of renderTable) {
     if (tableEntry.depth === 0) {
       outputString += tableEntry.value;
@@ -126,7 +126,7 @@ const printTree = (renderTable: any, options: any) => {
   return outputString;
 };
 
-const setStyleProps = (options: {}) => {
+const setStyleProps = (options: object) => {
   const sequences = Object.assign(DEFAULT_OPTIONS.sequences, options);
   const pathSeparator = DEFAULT_OPTIONS.pathSeparator;
   return { sequences, pathSeparator };
