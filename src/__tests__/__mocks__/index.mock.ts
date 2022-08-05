@@ -1,4 +1,4 @@
-import { RecursiveDirectory } from '../../index';
+import { Files, RecursiveDirectory } from '../../index';
 
 const MockDirectory = {
   dir: {
@@ -29,7 +29,7 @@ const MockDirectory = {
   empty: {},
 };
 
-const SuccessResultAsArray: RecursiveDirectory = [
+const SuccessResultAsArray: Files = [
   '/home/mkabumttar/work/recursive-directory/dir/assets/css/normalize.css',
   '/home/mkabumttar/work/recursive-directory/dir/assets/css/style.css',
   '/home/mkabumttar/work/recursive-directory/dir/assets/icons/favicon.ico',
@@ -105,7 +105,7 @@ const SuccessResultAsObject: RecursiveDirectory = [
   },
 ];
 
-const SuccessResultAsTree = `/home/mkabumttar/work/recursive-directory/dir
+const SuccessResultAsTree: string = `/home/mkabumttar/work/recursive-directory/dir
 ├── assets
 |  ├── css
 |  |  ├── normalize.css
@@ -124,10 +124,10 @@ const EmptyResult: RecursiveDirectory = [];
 const EmptyResultTree = '';
 
 export {
+  EmptyResult,
+  EmptyResultTree,
   MockDirectory,
   SuccessResultAsArray,
   SuccessResultAsObject,
   SuccessResultAsTree,
-  EmptyResult,
-  EmptyResultTree,
 };

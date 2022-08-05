@@ -11,23 +11,23 @@ type Dir = z.infer<typeof DirSchema>;
 const AsObjectSchema = z.boolean();
 type AsObject = z.infer<typeof AsObjectSchema>;
 
-const RecursiveDirectorySchema = z
-  .array(
-    z.object({
-      fullpath: z.string(),
-      filepath: z.string(),
-      filename: z.string(),
-      dirname: z.string(),
-    }),
-  )
-  .or(z.string().array());
+const FilesSchema = z.string().array();
+export type Files = z.infer<typeof FilesSchema>;
 
+const RecursiveDirectorySchema = z.array(
+  z.object({
+    fullpath: z.string(),
+    filepath: z.string(),
+    filename: z.string(),
+    dirname: z.string(),
+  }),
+);
 export type RecursiveDirectory = z.infer<typeof RecursiveDirectorySchema>;
 
 const recursiveDirectory = (
   dir: Dir,
   asObject: AsObject = false,
-): Promise<RecursiveDirectory> => {
+): Promise<RecursiveDirectory | Files> => {
   if (
     !DirSchema.safeParse(dir).success ||
     !AsObjectSchema.safeParse(asObject).success
@@ -71,7 +71,5 @@ const recursiveDirectory = (
     );
   });
 };
-
-export type { RecursiveDirectory as RecursiveDirectoryType };
 
 export default recursiveDirectory;

@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, test } from '@jest/globals';
 import mock from 'mock-fs';
-import recursiveDirectory, { RecursiveDirectory } from '../index';
 
+import recursiveDirectory, { Files, RecursiveDirectory } from '../index';
 import {
   EmptyResult,
   MockDirectory,
@@ -18,28 +18,34 @@ afterEach(() => {
 });
 
 test('List of files as lest', async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('dir');
+  const files: Files = (await recursiveDirectory('dir')) as Files;
 
   expect(files).toBeInstanceOf(Array);
   expect(files).toEqual(SuccessResultAsArray);
 });
 
 test('List of files as object', async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('dir', true);
+  const files: RecursiveDirectory = (await recursiveDirectory(
+    'dir',
+    true,
+  )) as RecursiveDirectory;
 
   expect(files).toBeInstanceOf(Array);
   expect(files).toEqual(SuccessResultAsObject);
 });
 
 test('List of files as lest empty directory', async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('empty');
+  const files: Files = (await recursiveDirectory('empty')) as Files;
 
   expect(files).toBeInstanceOf(Array);
   expect(files).toEqual(EmptyResult);
 });
 
 test('List of files as object empty directory', async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('empty', true);
+  const files: RecursiveDirectory = (await recursiveDirectory(
+    'empty',
+    true,
+  )) as RecursiveDirectory;
 
   expect(files).toBeInstanceOf(Array);
   expect(files).toEqual(EmptyResult);

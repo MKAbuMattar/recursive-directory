@@ -1,10 +1,7 @@
 import { afterEach, beforeEach, expect, test } from '@jest/globals';
 import mock from 'mock-fs';
-import recursiveDirectory, {
-  directoryTree,
-  RecursiveDirectory,
-} from '../index';
 
+import recursiveDirectory, { directoryTree, Files } from '../index';
 import {
   EmptyResultTree,
   MockDirectory,
@@ -20,9 +17,7 @@ afterEach(() => {
 });
 
 test('List of files to tree', async () => {
-  const files: RecursiveDirectory = (await recursiveDirectory(
-    'dir',
-  )) as string[];
+  const files: Files = (await recursiveDirectory('dir')) as Files;
 
   const fileTree = directoryTree(files);
 
@@ -30,9 +25,7 @@ test('List of files to tree', async () => {
 });
 
 test('List of files to tree empty', async () => {
-  const files: RecursiveDirectory = (await recursiveDirectory(
-    'empty',
-  )) as string[];
+  const files: Files = (await recursiveDirectory('empty')) as Files;
 
   const fileTree = directoryTree(files);
 
