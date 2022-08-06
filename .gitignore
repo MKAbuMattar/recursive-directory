@@ -4,5 +4,5 @@ build
 coverage
 /lib
 node_modules
-src/playground.ts
+src/playground
 yarn-error.log

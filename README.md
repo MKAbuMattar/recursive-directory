@@ -48,10 +48,10 @@ pnpm add recursive-directory
 - TypeScript
 
 ```ts
-import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
+import { Files, recursiveDirectory } from 'recursive-directory';
 
 (async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('./dir');
+  const files: Files = (await recursiveDirectory('./dir')) as Files;
 
   console.log(files);
 })();
@@ -72,10 +72,12 @@ import { recursiveDirectory } from 'recursive-directory';
 - CommonJS
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir');
+  const { recursiveDirectory } = _recursiveDirectory;
+
+  const files = await recursiveDirectory('./dir');
 
   console.log(files);
 })();
@@ -106,10 +108,13 @@ const recursiveDirectory = require('recursive-directory');
 - TypeScript
 
 ```ts
-import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
+import { RecursiveDirectory, recursiveDirectory } from 'recursive-directory';
 
 (async () => {
-  const files: RecursiveDirectory = await recursiveDirectory('./dir', true);
+  const files: RecursiveDirectory = (await recursiveDirectory(
+    './dir',
+    true,
+  )) as RecursiveDirectory;
 
   console.log(files);
 })();
@@ -130,10 +135,12 @@ import { recursiveDirectory } from 'recursive-directory';
 - CommonJS
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir', true);
+  const { recursiveDirectory } = _recursiveDirectory;
+
+  const files = await recursiveDirectory('./dir', true);
 
   console.log(files);
 })();
@@ -209,16 +216,10 @@ const recursiveDirectory = require('recursive-directory');
 - TypeScript
 
 ```ts
-import {
-  recursiveDirectory,
-  RecursiveDirectory,
-  directoryTree,
-} from 'recursive-directory';
+import { directoryTree, Files, recursiveDirectory } from 'recursive-directory';
 
 (async () => {
-  const files: RecursiveDirectory = (await recursiveDirectory(
-    './dir',
-  )) as string[];
+  const files: Files = (await recursiveDirectory('./dir')) as Files[];
 
   const fileTree = directoryTree(files);
 
@@ -243,12 +244,14 @@ import { recursiveDirectory, directoryTree } from 'recursive-directory';
 - CommonJS
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir');
+  const { recursiveDirectory, directoryTree } = _recursiveDirectory;
 
-  const fileTree = recursiveDirectory.directoryTree(files);
+  const files = await recursiveDirectory('./dir');
+
+  const fileTree = directoryTree(files);
 
   console.log(fileTree);
 })();
@@ -284,16 +287,12 @@ const recursiveDirectory = require('recursive-directory');
 - TypeScript
 
 ```ts
-import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
-import path, { dirname } from 'path';
+import { Files, recursiveDirectory } from 'recursive-directory';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import path from 'path';
 
 (async () => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-
-  const files: RecursiveDirectory = await recursiveDirectory('./dir');
+  const files: Files = (await recursiveDirectory('./dir')) as Files;
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
@@ -303,41 +302,30 @@ import { fileURLToPath } from 'url';
 ```
 
 ```ts
-import { recursiveDirectory, RecursiveDirectory } from 'recursive-directory';
-import path, { dirname } from 'path';
+import { RecursiveDirectory, recursiveDirectory } from 'recursive-directory';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
+import path from 'path';
 
 (async () => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-
-  const files: RecursiveDirectory = await recursiveDirectory('./dir', true);
-
-  fs.writeFileSync(
-    path.resolve(__dirname, 'build.config.json'),
-    JSON.stringify(files),
-  );
-})();
-```
-
-```ts
-import {
-  recursiveDirectory,
-  RecursiveDirectory,
-  directoryTree,
-} from 'recursive-directory';
-import path, { dirname } from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
-
-(async () => {
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-
   const files: RecursiveDirectory = (await recursiveDirectory(
     './dir',
-  )) as string[];
+    true,
+  )) as RecursiveDirectory;
+
+  fs.writeFileSync(
+    path.resolve(__dirname, 'build.config.json'),
+    JSON.stringify(files),
+  );
+})();
+```
+
+```ts
+import { directoryTree, Files, recursiveDirectory } from 'recursive-directory';
+import fs from 'fs';
+import path from 'path';
+
+(async () => {
+  const files: Files = (await recursiveDirectory('./dir')) as Files;
 
   const fileTree = directoryTree(files);
 
@@ -349,8 +337,8 @@ import { fileURLToPath } from 'url';
 
 ```js
 import { recursiveDirectory } from 'recursive-directory';
-import path, { dirname } from 'path';
 import fs from 'fs';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 (async () => {
@@ -387,8 +375,8 @@ import { fileURLToPath } from 'url';
 
 ```js
 import { recursiveDirectory, directoryTree } from 'recursive-directory';
-import path, { dirname } from 'path';
 import fs from 'fs';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 (async () => {
@@ -406,12 +394,14 @@ import { fileURLToPath } from 'url';
 - CommonJS
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 const path = require('path');
 const fs = require('fs');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir');
+  const { recursiveDirectory } = _recursiveDirectory;
+
+  const files = await recursiveDirectory('./dir');
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
@@ -421,12 +411,14 @@ const fs = require('fs');
 ```
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 const path = require('path');
 const fs = require('fs');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir', true);
+  const { recursiveDirectory } = _recursiveDirectory;
+
+  const files = await recursiveDirectory('./dir', true);
 
   fs.writeFileSync(
     path.resolve(__dirname, 'build.config.json'),
@@ -436,13 +428,15 @@ const fs = require('fs');
 ```
 
 ```js
-const recursiveDirectory = require('recursive-directory');
+const _recursiveDirectory = require('recursive-directory');
 const path = require('path');
 const fs = require('fs');
 
 (async () => {
-  const files = await recursiveDirectory.recursiveDirectory('./dir');
-  const fileTree = recursiveDirectory.directoryTree(files);
+  const { recursiveDirectory, directoryTree } = _recursiveDirectory;
+
+  const files = await recursiveDirectory('./dir');
+  const fileTree = directoryTree(files);
 
   fs.writeFileSync(path.resolve(__dirname, 'build.config.txt'), fileTree);
 })();

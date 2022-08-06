@@ -10,5 +10,3 @@ export { recursiveDirectory };
 export type { Files, RecursiveDirectory };
 export { directoryTree };
 export type { Options };
-
-export default recursiveDirectory;

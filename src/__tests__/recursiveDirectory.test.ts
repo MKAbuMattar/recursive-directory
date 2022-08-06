@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, test } from '@jest/globals';
 import mock from 'mock-fs';
 
-import recursiveDirectory, { Files, RecursiveDirectory } from '../index';
+import { Files, RecursiveDirectory, recursiveDirectory } from '../index';
 import {
   EmptyResult,
   MockDirectory,
