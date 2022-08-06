@@ -1,33 +1,26 @@
-class Edge {
-  value: any;
-  children: any;
-  constructor(value: any) {
-    this.value = value;
-    this.children = new Map();
-  }
+import { z } from 'zod';
 
-  addChild(value: any) {
-    if (!this.children.has(value)) {
-      const newNode = new Edge(value);
-      this.children.set(value, newNode);
-      return newNode;
-    }
-    return this.children.get(value);
-  }
-}
+import Edge from '../helpers/edge.helper';
+import RenderTableEntry from '../helpers/renderTableEntry.helper';
 
-class RenderTableEntry {
-  value: any;
-  depth: any;
-  isLastChild: any;
-  constructor(value: any, depth: any, isLastChild: any) {
-    this.value = value;
-    this.depth = depth;
-    this.isLastChild = isLastChild;
-  }
-}
+const FilesSchema = z.string().array();
+type Files = z.infer<typeof FilesSchema>;
 
-const DEFAULT_OPTIONS = {
+const SequencesSchema = z.object({
+  throughTee: z.string(),
+  endTee: z.string(),
+  vertical: z.string(),
+  emptyColumn: z.string(),
+});
+type Sequences = z.infer<typeof SequencesSchema>;
+
+const OptionsSchema = z.object({
+  pathSeparator: z.string(),
+  sequences: SequencesSchema,
+});
+export type Options = z.infer<typeof OptionsSchema>;
+
+const DEFAULT_OPTIONS: Options = {
   pathSeparator: '/',
   sequences: {
     throughTee: '├──',
@@ -37,88 +30,95 @@ const DEFAULT_OPTIONS = {
   },
 };
 
-const parseTree = (filePaths: any, options: { pathSeparator?: any }) => {
-  const PATH_SEPARATOR = options.pathSeparator;
-  const roots = new Map();
+const parseTree = (filePaths: Files, options: Options) => {
+  const PATH_SEPARATOR: string = options.pathSeparator;
+  const roots: Map<string, Edge> = new Map();
 
   // Parse into tree
-  let pathElements: any, rootElement: any, node: Edge;
+  let pathElements: string[];
+  let rootElement: string | undefined;
+  let edge: Edge | undefined;
+
   for (const path of filePaths) {
     pathElements = path.split(PATH_SEPARATOR);
-    rootElement = pathElements.shift();
+    rootElement = pathElements.shift() as string;
 
-    node = roots.get(rootElement);
-    if (node == null) {
-      node = new Edge(rootElement);
-      roots.set(rootElement, node);
+    edge = roots.get(rootElement);
+
+    if (edge == null) {
+      edge = new Edge(rootElement as string);
+      roots.set(rootElement, edge);
     }
+
     for (const pathElement of pathElements) {
-      node = node.addChild(pathElement);
+      edge = edge!.addChild(pathElement);
     }
   }
   return builderRenderTable(roots, PATH_SEPARATOR);
 };
 
 const builderRenderTable = (
-  roots: { values: () => any },
-  pathSeparator: any,
+  roots: Map<string, Edge>,
+  pathSeparator: string,
 ) => {
-  const renderTable = [];
-  let toVisit = [...roots.values()];
+  const renderTable: RenderTableEntry[] = [];
+  let toVisit: Edge[] = [...roots.values()];
 
-  const nodeDepths = new Map();
-  const lastNodes = new Set([toVisit[toVisit.length - 1]]);
+  const edgeDepths = new Map();
+  const lastEdges: Set<Edge> = new Set([toVisit[toVisit.length - 1]]);
 
   while (toVisit.length > 0) {
-    const currentNode = toVisit.shift();
+    const currentEdge = toVisit.shift();
 
-    const nodeDepth = nodeDepths.get(currentNode) || 0;
+    const edgeDepth = edgeDepths.get(currentEdge) || 0;
 
-    while (currentNode.children.size === 1) {
-      const childNode = currentNode.children.values().next().value;
-      currentNode.value += `${pathSeparator}${childNode.value}`;
-      currentNode.children = childNode.children;
+    while (currentEdge?.children.size === 1) {
+      const childEdge = currentEdge.children.values().next().value;
+      currentEdge.value += `${pathSeparator}${childEdge.value}`;
+      currentEdge.children = childEdge.children;
     }
 
-    const children = [...currentNode.children.values()];
+    const children = [...currentEdge!.children.values()];
     if (children.length > 0) {
       for (const child of children) {
-        nodeDepths.set(child, nodeDepth + 1);
+        edgeDepths.set(child, edgeDepth + 1);
       }
-      lastNodes.add(children[children.length - 1]);
+      lastEdges.add(children[children.length - 1]);
       toVisit = children.concat(toVisit);
     }
 
     renderTable.push(
       new RenderTableEntry(
-        currentNode.value,
-        nodeDepth,
-        lastNodes.has(currentNode),
+        currentEdge!.value,
+        edgeDepth,
+        lastEdges.has(currentEdge as Edge),
       ),
     );
   }
   return renderTable;
 };
 
-const printTree = (renderTable: any, options: any) => {
+const printTree = (renderTable: RenderTableEntry[], options: Options) => {
   let outputString = '';
   const activeColumns = [];
+
   for (const tableEntry of renderTable) {
-    if (tableEntry.depth === 0) {
-      outputString += tableEntry.value;
-    } else {
+    if (tableEntry.depth !== 0) {
       for (let column = 1; column < tableEntry.depth; column++) {
-        if (activeColumns[column]) {
-          outputString += options.sequences.vertical;
-        } else {
+        if (!activeColumns[column]) {
           outputString += options.sequences.emptyColumn;
+        } else {
+          outputString += options.sequences.vertical;
         }
       }
       outputString += tableEntry.isLastChild
         ? options.sequences.endTee
         : options.sequences.throughTee;
       outputString += ' ' + tableEntry.value;
+    } else {
+      outputString += tableEntry.value;
     }
+
     outputString +=
       tableEntry === renderTable[renderTable.length - 1] ? '' : '\n';
     activeColumns[tableEntry.depth] = !tableEntry.isLastChild;
@@ -127,21 +127,35 @@ const printTree = (renderTable: any, options: any) => {
 };
 
 const setStyleProps = (options: object) => {
-  const sequences = Object.assign(DEFAULT_OPTIONS.sequences, options);
-  const pathSeparator = DEFAULT_OPTIONS.pathSeparator;
-  return { sequences, pathSeparator };
+  const sequences: Sequences = Object.assign(
+    DEFAULT_OPTIONS.sequences,
+    options,
+  );
+  const pathSeparator: string = DEFAULT_OPTIONS.pathSeparator;
+
+  return {
+    sequences,
+    pathSeparator,
+  };
 };
 
-const directoryTree = (files: string[], options = {}): string => {
+const directoryTree = (
+  files: Files,
+  options: Options | object = {},
+): string => {
+  if (!OptionsSchema.safeParse(options).success) {
+    options = setStyleProps(options);
+  }
+
+  if (!FilesSchema.safeParse(files).success) {
+    throw new Error('Invalid arguments');
+  }
+
   if (files === undefined || files.length === 0) {
     return '';
   }
 
-  options = setStyleProps(options);
-  if (!files || typeof files[Symbol.iterator] !== 'function') {
-    return '';
-  }
-  return printTree(parseTree(files, options), options);
+  return printTree(parseTree(files, options as Options), options as Options);
 };
 
 export default directoryTree;
