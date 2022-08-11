@@ -1,6 +1,6 @@
 {
   "name": "recursive-directory",
-  "version": "0.0.0-rc-0.0.3",
+  "version": "0.0.0-rc-0.0.4",
   "description": "Recursive Directory is an npm package that allows you to directory and returns a list of files.",
   "keywords": [
     "recursive",
@@ -20,10 +20,6 @@
   },
   "bugs": {
     "url": "https://github.com/MKAbuMattar/recursive-directory/issues"
-  },
-  "engines": {
-    "yarn": ">=1.20.0",
-    "npm": "please-use-yarn"
   },
   "scripts": {
     "clean:lib": "rm -rf lib",
