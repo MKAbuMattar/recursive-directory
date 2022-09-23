@@ -30,82 +30,83 @@ const MockDirectory = {
 };
 
 const SuccessResultAsArray: Files = [
-  '/home/mkabumttar/work/recursive-directory/dir/assets/css/normalize.css',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/css/style.css',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/icons/favicon.ico',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/icons/icon.svg',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.png',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.svg',
-  '/home/mkabumttar/work/recursive-directory/dir/assets/js/main.js',
-  '/home/mkabumttar/work/recursive-directory/dir/index.html',
-  '/home/mkabumttar/work/recursive-directory/dir/manifest.webmanifest',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/css/normalize.css',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/css/style.css',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/icons/favicon.ico',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/icons/icon.svg',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/images/logo.png',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/images/logo.svg',
+  '/home/mkabumattar/work/recursive-directory/dir/assets/js/main.js',
+  '/home/mkabumattar/work/recursive-directory/dir/index.html',
+  '/home/mkabumattar/work/recursive-directory/dir/manifest.webmanifest',
 ];
 
 const SuccessResultAsObject: RecursiveDirectory = [
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/css/normalize.css',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/css/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/css/normalize.css',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/css/',
     filename: 'normalize.css',
     dirname: 'css',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/css/style.css',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/css/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/css/style.css',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/css/',
     filename: 'style.css',
     dirname: 'css',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/icons/favicon.ico',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/icons/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/icons/favicon.ico',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/icons/',
     filename: 'favicon.ico',
     dirname: 'icons',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/icons/icon.svg',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/icons/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/icons/icon.svg',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/icons/',
     filename: 'icon.svg',
     dirname: 'icons',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.png',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/images/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/images/logo.png',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/images/',
     filename: 'logo.png',
     dirname: 'images',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/assets/images/logo.svg',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/images/',
+      '/home/mkabumattar/work/recursive-directory/dir/assets/images/logo.svg',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/images/',
     filename: 'logo.svg',
     dirname: 'images',
   },
   {
-    fullpath: '/home/mkabumttar/work/recursive-directory/dir/assets/js/main.js',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/assets/js/',
+    fullpath:
+      '/home/mkabumattar/work/recursive-directory/dir/assets/js/main.js',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/assets/js/',
     filename: 'main.js',
     dirname: 'js',
   },
   {
-    fullpath: '/home/mkabumttar/work/recursive-directory/dir/index.html',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/',
+    fullpath: '/home/mkabumattar/work/recursive-directory/dir/index.html',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/',
     filename: 'index.html',
     dirname: 'dir',
   },
   {
     fullpath:
-      '/home/mkabumttar/work/recursive-directory/dir/manifest.webmanifest',
-    filepath: '/home/mkabumttar/work/recursive-directory/dir/',
+      '/home/mkabumattar/work/recursive-directory/dir/manifest.webmanifest',
+    filepath: '/home/mkabumattar/work/recursive-directory/dir/',
     filename: 'manifest.webmanifest',
     dirname: 'dir',
   },
 ];
 
-const SuccessResultAsTree = `/home/mkabumttar/work/recursive-directory/dir
+const SuccessResultAsTree = `/home/mkabumattar/work/recursive-directory/dir
 ├── assets
 |  ├── css
 |  |  ├── normalize.css
