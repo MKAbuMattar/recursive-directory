@@ -1,5 +1,6 @@
 import glob from 'glob';
 import path from 'path';
+
 import { AsObject, Dir, Files, RecursiveDirectory } from '../types';
 
 const recursiveDirectory = (
