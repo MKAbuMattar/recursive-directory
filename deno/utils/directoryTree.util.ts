@@ -1,6 +1,6 @@
-import parseTree from '../helpers/parseTree.helper';
-import printTree from '../helpers/printTree.helper';
-import { Files, Options, Sequences } from '../types';
+import parseTree from '../helpers/parseTree.helper.ts';
+import printTree from '../helpers/printTree.helper.ts';
+import { Files, Options, Sequences } from '../types/index.ts';
 
 const DEFAULT_OPTIONS: Options = {
   pathSeparator: '/',

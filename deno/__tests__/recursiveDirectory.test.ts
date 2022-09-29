@@ -1,11 +1,14 @@
-import { expect, test } from '@jest/globals';
+import { expect } from 'https://deno.land/x/expect@v0.2.6/mod.ts';
+const test = Deno.test;
 
-import { Files, RecursiveDirectory, recursiveDirectory } from '../index';
+import { Files, RecursiveDirectory, recursiveDirectory } from '../index.ts';
 import {
   EmptyResult,
+  EmptyResultTree,
   SuccessResultAsArray,
   SuccessResultAsObject,
-} from './__mocks__/index.mock';
+  SuccessResultAsTree,
+} from './__mocks__/deno.mock.ts';
 
 test('List of files as lest', async () => {
   const files: Files = (await recursiveDirectory('dir')) as Files;
