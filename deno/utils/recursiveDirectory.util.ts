@@ -1,7 +1,7 @@
-import glob from 'glob';
-import path from 'path';
+import glob from 'https://esm.sh/glob';
+import path from 'https://esm.sh/path';
 
-import { AsObject, Dir, Files, RecursiveDirectory } from '../types';
+import { AsObject, Dir, Files, RecursiveDirectory } from '../types/index.ts';
 
 const recursiveDirectory = (
   dir: Dir,

@@ -2,7 +2,9 @@
 *.log
 build
 coverage
-/lib
+dir
+empty
+lib
 node_modules
 src/playground
 yarn-error.log

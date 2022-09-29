@@ -1,4 +1,4 @@
-import { Files, RecursiveDirectory } from '../../index';
+import { Files, RecursiveDirectory } from '../../index.ts';
 
 const SuccessResultAsArray: Files = [
   '/home/mkabumattar/work/recursive-directory/dir/assets/css/normalize.css',
