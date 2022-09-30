@@ -3,12 +3,16 @@
 
   <h1>Recursive Directory</h1>
 
-  <p>Recursive Directory is an npm package that allows you to directory and returns a list of files.</p>
+  <p>Recursive Directory is a package that allows you to recurse a directory, you can return multiple choices as an object, list, or tree.</p>
 </div>
 
 <div align="center">
   <a href="https://www.npmjs.com/package/recursive-directory" target="_blank">
     <img src="https://img.shields.io/badge/npm-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt=""/>
+  </a>
+
+  <a href="https://deno.land/x/recursive_directory" target="_blank">
+    <img src="https://img.shields.io/badge/deno-000000?style=for-the-badge&logo=deno&logoColor=white" alt=""/>
   </a>
 
   <a href="https://github.com/MKAbuMattar/recursive-directory" target="_blank">
@@ -19,7 +23,7 @@
     <img alt="GitHub release" src="https://img.shields.io/github/v/release/MKAbuMattar/recursive-directory?color=%23d52128&label=Latest%20release&style=for-the-badge" />
     </a>
 
-  <a href="/LICENSE">
+  <a href="https://github.com/MKAbuMattar/recursive-directory/blob/main/LICENSE">
     <img alt="GitHub" src="https://img.shields.io/github/license/MKAbuMattar/recursive-directory?color=%23d52128&style=for-the-badge">
   </a>
 
@@ -50,7 +54,7 @@ Unlike Node, Deno doesn't use a package management like NPM and instead depends 
 You can also specify a particular version:
 
 ```ts
-import { recursiveDirectory } from 'https://deno.land/x/recursive_directory@0.0.6/mod.ts';
+import { recursiveDirectory } from 'https://deno.land/x/recursive_directory@0.0.8/mod.ts';
 ```
 
 or letest version:
