@@ -12,19 +12,27 @@ const DEFAULT_OPTIONS: Options = {
   },
 };
 
-const setStyleProps = (options: object) => {
-  const sequences: Sequences = Object.assign(
-    DEFAULT_OPTIONS.sequences,
-    options,
-  );
-  const pathSeparator: string = DEFAULT_OPTIONS.pathSeparator;
-
-  return {
-    sequences,
-    pathSeparator,
+/**
+ * @param options - object with sequences and pathSeparator
+ * @returns object with sequences and pathSeparator
+ */
+const setStyleProps = (options: Options): Options => {
+  const sequences: Sequences = {
+    ...DEFAULT_OPTIONS.sequences,
+    ...options.sequences,
   };
+  const pathSeparator: string =
+    options.pathSeparator || DEFAULT_OPTIONS.pathSeparator;
+
+  return { sequences, pathSeparator };
 };
 
+/**
+ * Generates a tree-like string representation of the provided file paths.
+ * @param {Files} files - The file paths to generate the tree for.
+ * @param {Options | object} [options] - Options for customizing the tree.
+ * @return {string} - The tree-like string representation of the provided file paths.
+ */
 const directoryTree = (
   files: Files,
   options: Options | object = {},
@@ -33,7 +41,7 @@ const directoryTree = (
     return '';
   }
 
-  options = setStyleProps(options);
+  options = setStyleProps(options as Options);
 
   return printTree(parseTree(files, options as Options), options as Options);
 };

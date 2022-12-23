@@ -3,6 +3,12 @@ import path from 'path';
 
 import { AsObject, Dir, Files, RecursiveDirectory } from '../types';
 
+/**
+ * Recursively get the list of files in a directory.
+ * @param dir - The directory to get the files from.
+ * @param asObject - If true, returns an object with the file information instead of just the file paths.
+ * @returns A Promise that resolves to a list of file paths or file information objects.
+ */
 const recursiveDirectory = (
   dir: Dir,
   asObject: AsObject = false,
@@ -18,31 +24,35 @@ const recursiveDirectory = (
       (error: Error | null, files: Files) => {
         if (error) {
           reject(error);
+          return;
         }
 
         if (!asObject) {
           resolve(files);
+          return;
         }
 
-        try {
-          const filesObject: RecursiveDirectory = files.map((file) => {
-            const regexp = /^(.*[\\/])(.*)$/;
-            const match = regexp.exec(file);
+        const filesObject: RecursiveDirectory = files.map((file) => {
+          const regexp = /^(.*[\\/])(.*)$/;
+          const match = regexp.exec(file);
 
-            return {
-              fullpath: file,
-              filepath: match![1],
-              filename: match![2],
-              dirname: regexp.exec(
-                match![1].substring(0, match![1].length - 1),
-              )![2],
-            };
-          });
+          if (!match) {
+            throw new Error(
+              `Failed to extract file information from "${file}"`,
+            );
+          }
 
-          resolve(filesObject);
-        } catch (error) {
-          reject(error);
-        }
+          return {
+            fullpath: file,
+            filepath: match[1],
+            filename: match[2],
+            dirname: regexp.exec(
+              match[1].substring(0, match[1].length - 1),
+            )![2],
+          };
+        });
+
+        resolve(filesObject);
       },
     );
   });

@@ -10,7 +10,7 @@ import {
   SuccessResultAsTree,
 } from './__mocks__/deno.mock.ts';
 
-test('List of files as lest', async () => {
+test('List of files as array', async () => {
   const files: Files = (await recursiveDirectory('dir')) as Files;
 
   expect(files).toBeInstanceOf(Array);
@@ -27,14 +27,14 @@ test('List of files as object', async () => {
   expect(files).toEqual(SuccessResultAsObject);
 });
 
-test('List of files as lest empty directory', async () => {
+test('List of files as array for empty directory', async () => {
   const files: Files = (await recursiveDirectory('empty')) as Files;
 
   expect(files).toBeInstanceOf(Array);
   expect(files).toEqual(EmptyResult);
 });
 
-test('List of files as object empty directory', async () => {
+test('List of files as object for empty directory', async () => {
   const files: RecursiveDirectory = (await recursiveDirectory(
     'empty',
     true,
@@ -44,13 +44,13 @@ test('List of files as object empty directory', async () => {
   expect(files).toEqual(EmptyResult);
 });
 
-// test('List of files as lest empty argument', async () => {
+// test('Throws an error if the directory is empty', () => {
 //   expect(() => recursiveDirectory('')).toThrowError(
 //     'dir: "" must not be empty',
 //   );
 // });
 
-// test('List of files as object empty argument', async () => {
+// test('Throws an error if the directory is empty and asObject is true', () => {
 //   expect(() => recursiveDirectory('', true)).toThrowError(
 //     'dir: "" must not be empty',
 //   );

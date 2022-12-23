@@ -8,34 +8,24 @@ import {
 } from 'fs';
 import { dirname } from 'path';
 
-type File = {
-  dir: string;
-  name: string;
-};
-
-const recursiveAndbuild = (
-  root: string,
-  rootDir: string,
-  outDir: string,
-  skipFileList: File[],
-) => {
-  const join = (...parts: string[]) => parts.join('/').replace(/\/\//g, '/');
+const recursiveAndbuild = (root, rootDir, outDir, skipFileList) => {
+  const join = (...parts) => parts.join('/').replace(/\/\//g, '/');
 
   const projectRoot = process.cwd();
 
   const nodeSrcRoot = join(projectRoot, rootDir);
   const denoSrcRoot = join(projectRoot, outDir);
 
-  const skipList: string[] = [];
+  const skipList = [];
 
   if (skipFileList.length > 0) {
-    skipFileList.forEach((file: File) => {
+    skipFileList.forEach((file) => {
       const skipListFile = join(nodeSrcRoot, file.dir, file.name);
       skipList.push(skipListFile);
     });
   }
 
-  const build = (root: string) => {
+  const build = (root) => {
     for (const entry of readdirSync(join(nodeSrcRoot, root), {
       withFileTypes: true,
       encoding: 'utf-8',
@@ -127,10 +117,10 @@ const recursiveAndbuild = (
 };
 
 (() => {
-  const skipFileList: File[] = [
+  const skipFileList = [
     {
       dir: 'playground',
-      name: 'playground.ts',
+      name: 'index.ts',
     },
   ];
 
