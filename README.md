@@ -54,7 +54,7 @@ Unlike Node, Deno doesn't use a package management like NPM and instead depends 
 You can also specify a particular version:
 
 ```ts
-import { recursiveDirectory } from 'https://deno.land/x/recursive_directory@0.0.8/mod.ts';
+import { recursiveDirectory } from 'https://deno.land/x/recursive_directory@1.0.1/mod.ts';
 ```
 
 or letest version:

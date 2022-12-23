@@ -1,4 +1,4 @@
-import { expect, test } from '@jest/globals';
+import { test } from '@jest/globals';
 
 import { directoryTree, Files, recursiveDirectory } from '../index';
 import { EmptyResultTree, SuccessResultAsTree } from './__mocks__/index.mock';

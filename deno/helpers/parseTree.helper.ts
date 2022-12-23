@@ -1,8 +1,15 @@
 import { Files, Options } from '../types/index.ts';
 import builderRenderTable from './builderRenderTable.helper.ts';
 import Edge from './edge.helper.ts';
+import RenderTableEntry from './renderTableEntry.helper.ts';
 
-const parseTree = (filePaths: Files, options: Options) => {
+/**
+ * Parses the given file paths into a tree structure.
+ * @param {Files} filePaths - The file paths to parse.
+ * @param {Options} options - The options to use when parsing the file paths.
+ * @returns {RenderTableEntry[]} The tree structure.
+ */
+const parseTree = (filePaths: Files, options: Options): RenderTableEntry[] => {
   const PATH_SEPARATOR: string = options.pathSeparator;
   const roots: Map<string, Edge> = new Map();
 
@@ -13,17 +20,23 @@ const parseTree = (filePaths: Files, options: Options) => {
 
   for (const path of filePaths) {
     pathElements = path.split(PATH_SEPARATOR);
-    rootElement = pathElements.shift() as string;
+    rootElement = pathElements.shift();
+
+    if (rootElement == null) {
+      continue;
+    }
 
     edge = roots.get(rootElement);
 
     if (edge == null) {
-      edge = new Edge(rootElement as string);
+      edge = new Edge(rootElement);
       roots.set(rootElement, edge);
     }
 
     for (const pathElement of pathElements) {
-      edge = edge!.addChild(pathElement);
+      if (edge != null) {
+        edge = edge.addChild(pathElement);
+      }
     }
   }
   return builderRenderTable(roots, PATH_SEPARATOR);
