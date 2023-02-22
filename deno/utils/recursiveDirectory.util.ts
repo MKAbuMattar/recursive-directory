@@ -1,5 +1,5 @@
-import glob from 'https://esm.sh/glob';
-import path from 'https://esm.sh/path';
+import glob from 'npm:glob';
+import path from 'npm:path';
 
 import { AsObject, Dir, Files, RecursiveDirectory } from '../types/index.ts';
 

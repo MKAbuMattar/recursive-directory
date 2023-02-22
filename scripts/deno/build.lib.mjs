@@ -44,7 +44,7 @@ const recursiveAndbuild = (root, rootDir, outDir, skipFileList) => {
           /^(?:import|export)[\s\S]*?from\s*['"]([^'"]*)['"];$/gm,
           (line, target) => {
             if (target === '@jest/globals') {
-              return `import { expect } from 'https://deno.land/x/expect@v0.2.6/mod.ts';\r\nconst test = Deno.test;`;
+              return `import { expect } from 'https://deno.land/x/expect@v0.3.0/mod.ts';\r\nconst test = Deno.test;`;
             }
 
             if (target === './__mocks__/index.mock') {
@@ -58,11 +58,11 @@ const recursiveAndbuild = (root, rootDir, outDir, skipFileList) => {
             }
 
             if (target === 'glob') {
-              return `import glob from 'https://esm.sh/glob';`;
+              return `import glob from 'npm:glob';`;
             }
 
             if (target === 'path') {
-              return `import path from 'https://esm.sh/path';`;
+              return `import path from 'npm:path';`;
             }
 
             const targetNodePath = join(dirname(nodePath), target);

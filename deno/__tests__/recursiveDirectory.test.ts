@@ -1,4 +1,4 @@
-import { expect } from 'https://deno.land/x/expect@v0.2.6/mod.ts';
+import { expect } from 'https://deno.land/x/expect@v0.3.0/mod.ts';
 const test = Deno.test;
 
 import { Files, RecursiveDirectory, recursiveDirectory } from '../index.ts';
