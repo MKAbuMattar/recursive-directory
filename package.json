@@ -1,6 +1,6 @@
 {
   "name": "recursive-directory",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Recursive Directory is a package that allows you to recurse a directory, you can return multiple choices as an object, list, or tree.",
   "keywords": [
     "recursive",
@@ -48,7 +48,7 @@
     "playground": "ts-node src/playground/index.ts",
     "playground:watch": "nodemon -e ts -w . -x ts-node src/playground/index.ts",
     "build:lib": "tsc --p tsconfig.cjs.json && rollup --config rollup.config.mjs",
-    "build:deno": "node scripts/deno/build.lib.mjs && yarn copy",
+    "build:deno": "ts-node scripts/deno/build.lib.ts && yarn copy",
     "build": "yarn clean && yarn build:lib && yarn build:deno",
     "publish:lib:latest": "npm publish",
     "publish:lib:beta": "npm publish --tag beta",
@@ -66,6 +66,7 @@
     "@types/node": "18.14.0",
     "@typescript-eslint/eslint-plugin": "5.53.0",
     "@typescript-eslint/parser": "5.53.0",
+    "build-deno": "1.0.2",
     "eslint": "8.34.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-import": "2.27.5",

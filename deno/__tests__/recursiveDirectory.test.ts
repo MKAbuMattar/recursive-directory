@@ -4,10 +4,8 @@ const test = Deno.test;
 import { Files, RecursiveDirectory, recursiveDirectory } from '../index.ts';
 import {
   EmptyResult,
-  EmptyResultTree,
   SuccessResultAsArray,
   SuccessResultAsObject,
-  SuccessResultAsTree,
 } from './__mocks__/deno.mock.ts';
 
 test('List of files as array', async () => {
