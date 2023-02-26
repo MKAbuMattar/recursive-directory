@@ -5,10 +5,5 @@
   },
   "testRegex": "src/.*\\.test\\.ts$",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
-  "coverageReporters": ["json-summary", "text", "lcov"],
-  "globals": {
-    "ts-jest": {
-      "tsconfig": "tsconfig.json"
-    }
-  }
+  "coverageReporters": ["json-summary", "text", "lcov"]
 }

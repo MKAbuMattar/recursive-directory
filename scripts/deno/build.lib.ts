@@ -44,7 +44,7 @@ build({
   skipFile: [
     {
       dir: 'playground',
-      name: 'index.ts',
+      file: 'index.ts',
     },
   ],
   copyFiles: [
