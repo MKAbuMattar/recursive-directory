@@ -1,6 +1,4 @@
-import { build } from 'build-deno';
-
-build({
+export default {
   root: '',
   rootDir: 'src',
   outDir: 'deno',
@@ -8,7 +6,7 @@ build({
     {
       byPackageName: true,
       package: `glob`,
-      replace: `import glob from 'npm:glob';`,
+      replace: `import glob from 'npm:glob@8.1.0';`,
     },
     {
       byPackageName: true,
@@ -53,4 +51,4 @@ build({
       to: 'README.md',
     },
   ],
-});
+};

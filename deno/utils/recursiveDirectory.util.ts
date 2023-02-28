@@ -1,4 +1,4 @@
-import glob from 'npm:glob';
+import glob from 'npm:glob@8.1.0';
 import path from 'npm:path';
 
 import { AsObject, Dir, Files, RecursiveDirectory } from '../types/index.ts';
