@@ -6,7 +6,7 @@ export default {
     {
       byPackageName: true,
       package: `glob`,
-      replace: `import glob from 'npm:glob';`,
+      replace: `import glob from 'npm:glob@8.1.0';`,
     },
     {
       byPackageName: true,
@@ -42,7 +42,7 @@ export default {
   skipFile: [
     {
       dir: 'playground',
-      name: 'index.ts',
+      file: 'index.ts',
     },
   ],
   copyFiles: [
