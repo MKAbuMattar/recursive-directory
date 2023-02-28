@@ -1,6 +1,6 @@
 {
   "name": "recursive-directory",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Recursive Directory is a package that allows you to recurse a directory, you can return multiple choices as an object, list, or tree.",
   "keywords": [
     "recursive",
@@ -49,7 +49,7 @@
     "playground": "tsx src/playground/index.ts",
     "playground:watch": "tsx watch src/playground/index.ts",
     "build:lib": "rollup --config rollup.config.mjs",
-    "build:deno": "build-deno -C build-deno.config.mjs && npm run copy",
+    "build:deno": "build-deno -C build-deno.config.mjs && npm run scripts:test && npm run copy",
     "build": "npm run clean && npm run build:lib && npm run build:deno && npm run clean:types",
     "publish:lib:latest": "npm publish",
     "publish:lib:beta": "npm publish --tag beta",
